@@ -1,22 +1,25 @@
-
-<div class="flex flex-wrap overflow-auto">
-    {% for product in products %}
-        <div class="product lg:w-1/4 w-full p-4">
-            <div class="p-4 w-full max-w-screen-xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-                <a href="{% url 'product_detail' product.category.slug product.slug %}"  >
-                    <!--Check if image exists -->
-                    
-                    <div class="image mb-2">
-                         
-                         <img src="{{ product.get_thumbnail }}" alt="Image of {{ product.title }}">
-                        
+<div class="flex justify-center m-6">
+    <div class="w-full max-w-screen-xl p-4 py-6 lg:py-8 bg-white dark:bg-gray-800">
+        {% if products %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% for product in products %}
+                    <div class="bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-105 dark:bg-gray-600 dark:border-gray-700">
+                        <a href="{% url 'product_detail' product.category.slug product.slug %}">
+                            <div class="aspect-w-16 aspect-h-10">
+                                <img src="{{ product.get_thumbnail }}" alt="Image of {{ product.title }}" class="object-cover w-full h-full rounded-t-lg">
+                            </div>
+                            <div class="p-4">
+                                <h2 class="text-xl font-semibold text-white">{{ product.title }}</h2>
+                                <p class="text-sm text-white">${{ product.get_display_price }}</p>
+                            </div>
+                        </a>
                     </div>
-                  
-                    <h2 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.title }}</h2>
-                    <p class="text-xs text-gray-300">${{ product.get_display_price }}</p>
-                </a>
+                {% endfor %}
             </div>
-        </div>
-    {% endfor %}
+        {% else %}
+            <p class="mt-4 py-4 px-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700 dark:text-white">
+                No products available.
+            </p>
+        {% endif %}
+    </div>
 </div>
-
