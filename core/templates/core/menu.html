@@ -1,0 +1,24 @@
+<div class="lg:flex lg:justify-between lg:items-center">
+    <div class="flex items-center justify-between p-4 lg:p-0">
+        <button id="menu-toggle" class="lg:hidden flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path> 
+            </svg>
+            Categories
+        </button>
+    </div>
+
+    <div id="menu" class="hidden lg:flex lg:items-center">
+        <nav class="lg:flex lg:space-x-4">
+            {% for category in categories %}
+                <a href="{% url 'category_detail' category.slug %}" class="text-lg font-semibold hover:text-gray-500 px-2 py-1 block">{{ category.title }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</div>
+
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        document.getElementById('menu').classList.toggle('hidden');
+    });
+</script>

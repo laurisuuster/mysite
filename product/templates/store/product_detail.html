@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="Yardgrowers, product detail">
+    <meta name="description" content="Describes products fined on yardgrowers site">
+    <meta name="author" content="Lauri Suuster">
+    <!--Social media specific tags-->
+    <meta property="og:title" content="{{product.title}}" />
+    <meta property="og:description" content="{{product.description}}" />
+    <meta property="og:type" content="article" />
+{% endblock %}
+
+{% block content %}
+    <!-- Product card styling -->
+    <div class="m-4 w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+        <!-- Check if image exists -->
+        {% if product.image %}
+            <div class="image rounded-lg mb-2">
+                <img src="{{product.image.url}}" alt="Image of {{ product.title }}">
+            </div>
+        {% endif %}
+        <h1 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.title }}</h1>
+
+        <p class="text-xs text-gray-300">
+            ${{ product.get_display_price }}
+            -
+            <!-- Display name of the user who created the listing -->
+            <a href="{% url 'vendor_detail' product.user.id %}">{% firstof product.user.get_full_name product.user.username %}</a>
+        </p>
+
+        {% if product.description %}
+            <p class="mt-4 tracking-tight text-gray-900 dark:text-gray-200">
+                {{ product.description }}
+            </p>
+        {% endif %}
+
+        <!-- Display region under the price -->
+        {% if product.region %}
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                Distribution region: {{ product.get_region_display }}
+            </p>
+        {% endif %}
+
+        <a href="{% url 'add_to_cart' product.id%}" class="mt-4 ml-auto inline-block text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add to Cart</a>
+    </div>
+    <div class="m-4 w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+        {% for review in reviews %}
+        <div class="m-4 w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+            <p class="text-xs text-gray-300">
+                <!-- Display name of the user who created the listing -->
+                <a href="{% url 'vendor_detail' review.user.id %}">{% firstof review.user.get_full_name review.user.username %}</a>
+                rated {{ review.rating }} ⭐  
+            </p>
+            <p class="mt-4 tracking-tight text-gray-900 dark:text-gray-200">
+                {{ review.comment }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+        <form action="{% url 'create_review' product.id%}" method="post" class="flex flex-col space-y-4 text-gray-400">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Add a new review" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+        </form>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+
+    <div class="flex justify-center m-6">
+        <div class="w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+            <h1 class="mt-4 mb-4 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Checkout</h1>
+
+            <h2 class="mt-4 mb-4 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Total cost: ${{ cart.get_total_cost }}</h2>
+            <div class="flex flex-col space-y-4 text-gray-400">
+                {{ form.as_p }}
+
+            </div>
+
+            <div id="errors" class="hidden my-3 px-4 py-4 bg-red-200 rounded-xl"></div>
+            <br>
+
+            <button class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="buy(event)">Checkout</button>
+        </div>
+     </div>
+
+
+
+
+    {% endblock %}
+
+{% block scripts %}
+<script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+<script>
+    function validate(first_name, last_name, address, zipcode, city) {
+        let errors = [];
+
+        if (first_name == '') {
+            errors.push('The first name is missing');
+        }
+
+        if (last_name == '') {
+            errors.push('The last name is missing');
+        }
+
+        if (address == '') {
+            errors.push('The address is missing');
+        }
+
+        if (zipcode == '') {
+            errors.push('The zipcode is missing');
+        }
+
+        if (city == '') {
+            errors.push('The city is missing');
+        }
+
+        let html = '';
+
+        for (let i = 0; i < errors.length; i++) {
+            html += errors[i] + '<br>';
+        }
+
+        let errorsElement = document.getElementById('errors');
+    
+        if (errors.length) {
+            errorsElement.classList.remove('hidden');
+            errorsElement.innerHTML = html;
+
+            return false;
+        } else {
+            errorsElement.classList.add('hidden');
+
+            return true;
+        }
+    }
+
+    function buy(event) {
+        event.preventDefault();
+
+        const first_name = document.getElementById('id_first_name').value;
+        const last_name = document.getElementById('id_last_name').value;
+        const address = document.getElementById('id_address').value;
+        const zipcode = document.getElementById('id_zipcode').value;
+        const city = document.getElementById('id_city').value;
+        // Shipping_option field
+        const shipping_option = document.getElementById('id_shipping_option').value;
+
+        if (validate(first_name, last_name, address, zipcode, city)) {
+            let data = {
+                'first_name': first_name,
+                'last_name': last_name,
+                'address': address,
+                'zipcode': zipcode,
+                'city': city,
+                'shipping_option': shipping_option, 
+            }
+
+            let stripe = Stripe('{{ pub_key }}');
+
+            fetch('/cart/checkout/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(data)
+            })
+            .then(function(response) {
+                return response.json()
+            })
+            .then(function(session) {
+                return stripe.redirectToCheckout({ sessionId: session.session.id })
+            })
+            .then(function(result) {
+                if (result.error) {
+                    alert(result.error.message)
+                }
+            })
+            .catch(function(error) {
+                alert(error)
+            });
+        }
+
+        return false;
+    }
+</script>
+{% endblock %}

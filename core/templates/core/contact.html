@@ -1,0 +1,33 @@
+{% extends 'core/base.html'%}
+
+<!--Title codeblock-->
+{% block title %} Contact {% endblock %}
+
+{% block meta %}
+        <meta name="keywords" content="Yardgrowers, contact, get in touch, customer support">
+        <meta name="description" content="Yardgrowers contact page">
+        <meta name="author" content="Lauri Suuster">
+        <!--Social media specific tags-->
+        <meta property="og:title" content="Get in touch!" />
+        <meta property="og:description" content="Get in touch with the best support team in the industry" />
+        <meta property="og:type" content="article" />
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center m-6">
+    <div class="w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+        <form action="/contact/" method="post" class="flex flex-col space-y-4 text-gray-400">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="flex flex-col">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Submit" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+        </form>
+    </div>
+</div>
+{% endblock %}
+

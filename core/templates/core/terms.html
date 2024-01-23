@@ -1,0 +1,48 @@
+<!-- core/terms.html -->
+
+{% extends 'core/base.html' %}
+
+{% block title %}Terms and Conditions{% endblock %}
+
+
+{% block meta %}
+        <meta name="keywords" content="Yardgrowers, terms and conditions, customer support">
+        <meta name="description" content="Yardgrowers contact page">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Lauri Suuster">
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-center m-6">
+    <div class="m-6 w-full max-w-screen-xl p-4 py-6 lg:py-8 max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+        <h1 class="text-4xl mt-2 font-semibold tracking-tight text-gray-900 dark:text-white">Terms and Conditions </h1>
+
+        <p class="mt-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            Welcome to Yard Growers Marketplace, a platform connecting buyers and sellers. By using our application, you agree to comply with and be bound by the following terms and conditions.
+        </p>
+
+        <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Acceptance of Terms</h2>
+        <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            Your use of the Yard Growers Marketplace is subject to your acceptance and compliance with these terms. If you do not agree with these terms, please refrain from using our application.
+        </p>
+
+        <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">User Registration</h2>
+        <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            To access certain features, you may be required to register for an account. You agree to provide accurate, current, and complete information during the registration process.
+        </p>
+
+        <!-- Add more sections based on your specific terms and New Zealand laws -->
+
+        <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Privacy and Data Protection</h2>
+        <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            We are committed to protecting your privacy. Please review our <a href="{% url 'privacy_policy' %}" class="text-blue-600 dark:text-blue-500 hover:underline">Privacy Policy</a> for details on how we collect, use, and protect your personal information.
+        </p>
+
+        <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Contact Information</h2>
+        <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            If you have any questions or concerns about these terms and conditions, please contact us at <a href="mailto:contact@yardgrowers.com" class="text-blue-600 dark:text-blue-500 hover:underline">contact@yardgrowers.com</a>.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

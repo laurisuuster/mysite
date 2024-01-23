@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center m-6">
+    <div class="w-full max-w-screen-md p-4 py-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700 text-white">
+        <h1 class="mb-6 text-2xl font-semibold">My Account</h1>
+
+        <!-- Display user details -->
+        <p class="text-lg"><strong>Username:</strong> {{ user.userprofile.user.username }}</p>
+        <p class="text-lg"><strong>Email:</strong> {{ user.userprofile.user.email }}</p>
+        
+        {% if user.userprofile.is_vendor %}
+            <p class="text-lg mb-4"><strong>Vendor Status:</strong> Vendor</p>
+        {% else %}
+            <p class="text-lg mb-4"><strong>Vendor Status:</strong> Not a Vendor</p>
+            <a href="{% url 'contact' %}" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Become a vendor</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Log out
+            </span>
+        </a>
+
+        <!-- Display user's orders with links to order details -->
+        <h2 class="text-xl mt-4 mb-2 font-semibold">My Orders</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {% if user.orders.all %}
+                {% for order in user.orders.all %}
+                    <a href="{% url 'my_store_order_detail' order.id %}" class="block p-4 border border-gray-200 rounded-md shadow-md hover:shadow-lg transition">
+                        <p><strong>Order ID:</strong> {{ order.id }}</p>
+                        <p><strong>Date:</strong> {{ order.created_at | date:"F j, Y" }}</p>
+                        <p><strong>Order Status:</strong> {{ order.get_order_status_display }}</p>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-500">No orders found.</p>
+            {% endif %}
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

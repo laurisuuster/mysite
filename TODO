@@ -1,0 +1,114 @@
+- DONE Create virtual enviroment 
+- DONE Install and setup
+- DONE Initilize db, superuser
+- DONE Create core app for base pages
+- DONE Create application for userprofiles 
+- DONE Create application for products 
+    - DONE Add Categories and test products
+- DONE List newest products on front page
+- DONE Product detail view
+- DONE Category detail view
+08/12/23
+- DONE Show vendore on product detail page
+- DONE Add images to the products
+    - DONE Install Pillow
+10/12/23
+- DONE Vendor Detail page 
+    - DONE Abilty to click on the vendor profile
+    - DONE Show vendor profile and products associated with the vendor 
+12/12/23
+- DONE Sign up functionality 
+- DONE Log in functionality 
+- DONE Log out functionality 
+- DONE Create  user account page 
+13/12/23
+- DONE Basic Search functionality 
+- Done Vendor panel
+
+14/12/23
+- DONE Add a product functionality
+- DONE Edit Product functionality 
+15/12/23
+- DONE Delete product functionality 
+16/12/23
+- DONE Style add product form 
+- DONE Style search bar 
+Worked on the menu 
+18/12/23
+- DONE Add product to the cart functionality 
+19/12/23
+- DONE Ability to see the contents of the cart 
+- DONE Remove products from the cart 
+20/12/23
+- DONE Increment/decrement item quantities 
+21/12/23
+- DONE add thumbnails to the images 
+- DONE Fix the design on cart page
+22/12/23
+- DONE Checkout page 
+23/12/23
+- Seperate shoppers from the vendors
+26/12/23
+- Build Context processor, cart button and backend functionality 
+- Add to cart menu
+27/12/23
+- DONE Vendors must be able to see their orders
+28/12/23
+- DONE Only authenticated users can proceed to the checout
+29/12/23 
+- DONE Sign Up Stripe
+- DONE Configure Stripe Account, dashboard and testing enviroment
+01/01/24
+- DONE Implement payment gateway 
+    - DONE Get API key from stripe
+    - DONE Install stripe
+    - DONE Pass pub key into checkout view 
+02/01/24
+- DONE Bug fixes and modification to product model so it could work with Stripe API
+03/01/24 
+Front and backend form validation for checkout
+04/01/24
+Alterations on nav bar, Specific buttons based on authentication, vendor status etc. 
+05/01/24
+Style nav bar and footer
+06/01/24 
+Style products.html, product_detail.html page
+07/01/24
+Generate FAQ page, content and provide styling 
+08/01/24
+Style sign in. html
+09/01/24
+Generate Terms and conditions  page, content and provide styling 
+Generate Privacy policy  page, content and provide styling 
+10/01/23
+Create a contact page, forms, backend functionality using mailtrap
+Configure mailtrap dash board 
+Test and style everything
+Alter order_detail page so it displays customer and shipping information together with order details
+Alter myaccount page so it displays vendur details
+11/01/23 
+Alter myaccount page so it displays actual text not a boolean value on vendor status. 
+Attempt and fail to build a automatic vendor validation in such manner that it limits malicous activity
+Revert back to simple button that directs to form and informs staff who does the vetting and updates the status on admin panel. 
+Add sorting functionality to search.html
+
+------------------------------------------------------
+- DONE Sign up and vendor account registration 
+- DONE Ability to list products on marketplace application.  
+- Inventory management system
+- Ability to process orders effectively.   
+- DONE Payment processing
+- DONE Vendor dashboard
+- Ability for growers and buyers to leave feedback. 
+- Shipping and delivery options 
+- DONE Product search and filtering 
+    - Maybe do filtering?
+- DONE Online shopping cart
+- Order tracking 
+- Personalized recommendations 
+- Content management.
+- WORKING ATM User training and support 
+- WORKING ATM SEO
+- contact page and postmark
+- postgresql
+- install tailwind 
