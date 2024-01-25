@@ -33,7 +33,7 @@
                     <a href="{% url 'my_store_order_detail' order.id %}" class="block p-4 border border-gray-200 rounded-md shadow-md hover:shadow-lg transition">
                         <p><strong>Order ID:</strong> {{ order.id }}</p>
                         <p><strong>Date:</strong> {{ order.created_at | date:"F j, Y" }}</p>
-                        <p><strong>Order Status:</strong> {{ order.get_order_status_display }}</p>
+                        <p><strong>Order Status:</strong> {{ order.status }}</p>
                     </a>
                 {% endfor %}
             {% else %}
